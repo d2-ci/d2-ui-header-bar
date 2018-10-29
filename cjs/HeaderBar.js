@@ -81,10 +81,6 @@ var _headerBarStyles = require('./header-bar-styles');
 
 var _headerBarStyles2 = _interopRequireDefault(_headerBarStyles);
 
-var _d2UiApp = require('@dhis2/d2-ui-app');
-
-var _d2UiApp2 = _interopRequireDefault(_d2UiApp);
-
 var _headerBar = require('./headerBar.store');
 
 var _headerBar2 = _interopRequireDefault(_headerBar);
@@ -140,7 +136,7 @@ var HeaderBar = exports.HeaderBar = function (_Component) {
             }
 
             return _react2.default.createElement(
-                _d2UiApp2.default,
+                _d2UiCore.App,
                 null,
                 _react2.default.createElement(
                     'div',
