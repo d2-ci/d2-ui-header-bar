@@ -1,6 +1,6 @@
 {
   "name": "@dhis2/d2-ui-header-bar",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "The header bar for all DHIS2 applications",
   "main": "./index.js",
   "module": "./index.js",
@@ -10,7 +10,7 @@
     "react-dom": "^16.2.0"
   },
   "dependencies": {
-    "@dhis2/d2-ui-core": "5.0.0",
+    "@dhis2/d2-ui-core": "5.0.1",
     "@material-ui/core": "^3.3.1",
     "@material-ui/icons": "^3.0.1",
     "babel-runtime": "^6.26.0",
