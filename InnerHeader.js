@@ -6,7 +6,7 @@ import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
 import _createClass from 'babel-runtime/helpers/createClass';
 import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructorReturn';
 import _inherits from 'babel-runtime/helpers/inherits';
-/* global dhis2 */
+/* global dhis2:false */
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
