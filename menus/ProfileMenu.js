@@ -25,6 +25,7 @@ var ProfileMenu = addD2Context(function (props, _ref) {
     }
 
     var initials = '' + currentUser.firstName.charAt(0) + currentUser.surname.charAt(0);
+
     var rightSide = React.createElement(
         'div',
         { style: styles.profileRightSide },
@@ -41,7 +42,7 @@ var ProfileMenu = addD2Context(function (props, _ref) {
                 null,
                 React.createElement(
                     'div',
-                    { key: name, style: styles.profileName },
+                    { style: styles.profileName },
                     currentUser.displayName
                 ),
                 React.createElement(

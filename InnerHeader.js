@@ -6,11 +6,12 @@ import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
 import _createClass from 'babel-runtime/helpers/createClass';
 import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructorReturn';
 import _inherits from 'babel-runtime/helpers/inherits';
+/* global dhis2:false */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import log from 'loglevel';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 import styles from './header-bar-styles';
 import getBaseUrlFromD2ApiUrl from './utils/getBaseUrlFromD2ApiUrl';
 
@@ -84,7 +85,9 @@ var InnerHeader = function (_Component) {
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(props) {
             if (this.props.lastUpdate && this.props.lastUpdate.getTime() - props.lastUpdate.getTime() !== 0) {
-                dhis2.menu.ui.bootstrapMenu();
+                if (dhis2 && dhis2.menu && dhis2.menu.ui && dhis2.menu.ui.bootstrapMenu) {
+                    dhis2.menu.ui.bootstrapMenu();
+                }
             }
         }
     }, {

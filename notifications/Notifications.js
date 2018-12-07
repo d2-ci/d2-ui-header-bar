@@ -5,7 +5,6 @@ import _inherits from 'babel-runtime/helpers/inherits';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { config } from 'd2';
-import IconButton from '@material-ui/core/IconButton';
 
 import NotificationItem from './NotificationItem';
 import getBaseUrlFromD2ApiUrl from '../utils/getBaseUrlFromD2ApiUrl';

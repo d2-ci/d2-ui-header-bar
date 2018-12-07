@@ -6,7 +6,6 @@ import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructo
 import _inherits from 'babel-runtime/helpers/inherits';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { findDOMNode } from 'react-dom';
 import { Observable } from 'rxjs/Observable';
 import log from 'loglevel';
 import TextField from '@material-ui/core/TextField';
@@ -15,7 +14,6 @@ import { SvgIcon } from '@dhis2/d2-ui-core';
 import ClearIcon from '@material-ui/icons/Clear';
 import AppsIcon from '@material-ui/icons/Apps';
 import { config } from 'd2';
-import Notifications from '../notifications/Notifications';
 import styles, { MENU_ITEM_WIDTH } from '../header-bar-styles';
 import { search, handleKeyPress, setSearchFieldFocusTo, hideWhenNotHovering } from './search.stores';
 import { withStateFrom } from '@dhis2/d2-ui-core';
