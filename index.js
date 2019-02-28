@@ -1,2 +1,13 @@
-import { default as HeaderBar } from './HeaderBar';
-export default HeaderBar;
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _HeaderBar = require('./HeaderBar');
+
+var _HeaderBar2 = _interopRequireDefault(_HeaderBar);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _HeaderBar2.default;

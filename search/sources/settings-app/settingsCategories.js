@@ -1,6 +1,11 @@
-export var categoryOrder = ['general', 'server', 'appearance', 'email', 'messaging', 'access', 'calendar', 'import', 'sync', 'monitoring', 'oauth2'];
+'use strict';
 
-export var categories = {
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var categoryOrder = exports.categoryOrder = ['general', 'server', 'appearance', 'email', 'messaging', 'access', 'calendar', 'import', 'sync', 'monitoring', 'oauth2'];
+
+var categories = exports.categories = {
     general: {
         label: 'general',
         icon: 'settings',

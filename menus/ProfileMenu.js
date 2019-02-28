@@ -1,81 +1,112 @@
-import _extends from 'babel-runtime/helpers/extends';
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
+'use strict';
 
-import HeaderMenu from './HeaderMenu';
-import HeaderMenuItem from './HeaderMenuItem';
-import { addD2Context } from '@dhis2/d2-ui-core';
-import getBaseUrlFromD2ApiUrl from '../utils/getBaseUrlFromD2ApiUrl';
-import styles from '../header-bar-styles';
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
-var getBaseUrl = getBaseUrlFromD2ApiUrl;
+var _extends2 = require('babel-runtime/helpers/extends');
 
-var ProfileMenu = addD2Context(function (props, _ref) {
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Avatar = require('@material-ui/core/Avatar');
+
+var _Avatar2 = _interopRequireDefault(_Avatar);
+
+var _Button = require('@material-ui/core/Button');
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _HeaderMenu = require('./HeaderMenu');
+
+var _HeaderMenu2 = _interopRequireDefault(_HeaderMenu);
+
+var _HeaderMenuItem = require('./HeaderMenuItem');
+
+var _HeaderMenuItem2 = _interopRequireDefault(_HeaderMenuItem);
+
+var _d2UiCore = require('@dhis2/d2-ui-core');
+
+var _getBaseUrlFromD2ApiUrl = require('../utils/getBaseUrlFromD2ApiUrl');
+
+var _getBaseUrlFromD2ApiUrl2 = _interopRequireDefault(_getBaseUrlFromD2ApiUrl);
+
+var _headerBarStyles = require('../header-bar-styles');
+
+var _headerBarStyles2 = _interopRequireDefault(_headerBarStyles);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var getBaseUrl = _getBaseUrlFromD2ApiUrl2.default;
+
+var ProfileMenu = (0, _d2UiCore.addD2Context)(function (props, _ref) {
     var d2 = _ref.d2;
     var currentUser = props.currentUser,
         items = props.items;
 
     var menuItems = items.map(function (item, index) {
-        return React.createElement(HeaderMenuItem, _extends({ key: index }, item));
+        return _react2.default.createElement(_HeaderMenuItem2.default, (0, _extends3.default)({ key: index }, item));
     });
 
     if (!currentUser.firstName) {
-        return React.createElement('div', null);
+        return _react2.default.createElement('div', null);
     }
 
     var initials = '' + currentUser.firstName.charAt(0) + currentUser.surname.charAt(0);
 
-    var rightSide = React.createElement(
+    var rightSide = _react2.default.createElement(
         'div',
-        { style: styles.profileRightSide },
-        React.createElement(
+        { style: _headerBarStyles2.default.profileRightSide },
+        _react2.default.createElement(
             'div',
-            { style: styles.profileFlexWrap },
-            React.createElement(
-                Avatar,
-                { style: styles.avatarBig },
+            { style: _headerBarStyles2.default.profileFlexWrap },
+            _react2.default.createElement(
+                _Avatar2.default,
+                { style: _headerBarStyles2.default.avatarBig },
                 initials
             ),
-            React.createElement(
+            _react2.default.createElement(
                 'div',
                 null,
-                React.createElement(
+                _react2.default.createElement(
                     'div',
-                    { style: styles.profileName },
+                    { style: _headerBarStyles2.default.profileName },
                     currentUser.displayName
                 ),
-                React.createElement(
+                _react2.default.createElement(
                     'div',
-                    { style: styles.profileMail },
+                    { style: _headerBarStyles2.default.profileMail },
                     currentUser.email
                 )
             )
         ),
-        React.createElement(
-            Button,
-            { style: styles.logoutButton, href: getBaseUrl(d2) + '/dhis-web-commons-security/logout.action' },
+        _react2.default.createElement(
+            _Button2.default,
+            { style: _headerBarStyles2.default.logoutButton, href: getBaseUrl(d2) + '/dhis-web-commons-security/logout.action' },
             d2.i18n.getTranslation('log_out')
         )
     );
 
-    return React.createElement(
-        HeaderMenu,
+    return _react2.default.createElement(
+        _HeaderMenu2.default,
         {
-            name: React.createElement(
-                Avatar,
-                { size: 32, style: styles.avatar },
+            name: _react2.default.createElement(
+                _Avatar2.default,
+                { size: 32, style: _headerBarStyles2.default.avatar },
                 initials
             ),
             rowItemCount: props.rowItemCount,
             columnItemCount: props.columnItemCount,
             rightSide: rightSide,
             width: 700,
-            menuStyle: styles.profileMenu,
+            menuStyle: _headerBarStyles2.default.profileMenu,
             padding: '1rem'
         },
         menuItems
     );
 });
 
-export default ProfileMenu;
+exports.default = ProfileMenu;

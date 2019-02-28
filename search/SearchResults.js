@@ -1,67 +1,106 @@
-import _Object$assign from 'babel-runtime/core-js/object/assign';
-import _extends from 'babel-runtime/helpers/extends';
-import React from 'react';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import { config } from 'd2';
-import SearchResultsList from './SearchResultsList';
-import HeaderMenuItem from '../menus/HeaderMenuItem';
-import { withStateFrom } from '@dhis2/d2-ui-core';
-import { addD2Context } from '@dhis2/d2-ui-core';
-import { searchStore$, setHovering } from './search.stores';
-import styles, { getSearchResultsHeight } from '../header-bar-styles';
-import NoResults from './NoResults';
-import getBaseUrlFromD2ApiUrl from '../utils/getBaseUrlFromD2ApiUrl';
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _assign = require('babel-runtime/core-js/object/assign');
+
+var _assign2 = _interopRequireDefault(_assign);
+
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Paper = require('@material-ui/core/Paper');
+
+var _Paper2 = _interopRequireDefault(_Paper);
+
+var _Button = require('@material-ui/core/Button');
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _d = require('d2');
+
+var _SearchResultsList = require('./SearchResultsList');
+
+var _SearchResultsList2 = _interopRequireDefault(_SearchResultsList);
+
+var _HeaderMenuItem = require('../menus/HeaderMenuItem');
+
+var _HeaderMenuItem2 = _interopRequireDefault(_HeaderMenuItem);
+
+var _d2UiCore = require('@dhis2/d2-ui-core');
+
+var _search = require('./search.stores');
+
+var _headerBarStyles = require('../header-bar-styles');
+
+var _headerBarStyles2 = _interopRequireDefault(_headerBarStyles);
+
+var _NoResults = require('./NoResults');
+
+var _NoResults2 = _interopRequireDefault(_NoResults);
+
+var _getBaseUrlFromD2ApiUrl = require('../utils/getBaseUrlFromD2ApiUrl');
+
+var _getBaseUrlFromD2ApiUrl2 = _interopRequireDefault(_getBaseUrlFromD2ApiUrl);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // App menu strings to be translated
-config.i18n.strings.add('manage_my_apps');
+_d.config.i18n.strings.add('manage_my_apps');
 
-var getBaseUrl = getBaseUrlFromD2ApiUrl;
+var getBaseUrl = _getBaseUrlFromD2ApiUrl2.default;
 
 function SearchResults(props, _ref) {
     var d2 = _ref.d2;
 
     var menuItems = (props.searchResults || []).map(function (item) {
-        return React.createElement(HeaderMenuItem, _extends({ key: item.name }, item));
+        return _react2.default.createElement(_HeaderMenuItem2.default, (0, _extends3.default)({ key: item.name }, item));
     });
 
-    var moreAppsButton = React.createElement(
-        Button,
+    var moreAppsButton = _react2.default.createElement(
+        _Button2.default,
         {
-            style: styles.moreAppsButton,
+            style: _headerBarStyles2.default.moreAppsButton,
             href: getBaseUrl(d2) + '/dhis-web-menu-management'
         },
         d2.i18n.getTranslation('manage_my_apps')
     );
 
-    var searchResultBoxContent = menuItems.length ? React.createElement(
-        SearchResultsList,
+    var searchResultBoxContent = menuItems.length ? _react2.default.createElement(
+        _SearchResultsList2.default,
         null,
         menuItems
-    ) : React.createElement(NoResults, null);
+    ) : _react2.default.createElement(_NoResults2.default, null);
 
-    var searchResultsWrap = _Object$assign({}, styles.searchResults, {
+    var searchResultsWrap = (0, _assign2.default)({}, _headerBarStyles2.default.searchResults, {
         display: 'flex',
         flexDirection: 'column',
-        height: props.open ? getSearchResultsHeight() : 0,
+        height: props.open ? (0, _headerBarStyles.getSearchResultsHeight)() : 0,
         overflow: props.open ? undefined : 'hidden'
     });
 
-    return React.createElement(
-        Paper,
+    return _react2.default.createElement(
+        _Paper2.default,
         { style: searchResultsWrap, onMouseEnter: function onMouseEnter() {
-                return setHovering(true);
+                return (0, _search.setHovering)(true);
             }, onMouseLeave: function onMouseLeave() {
-                return setHovering(false);
+                return (0, _search.setHovering)(false);
             } },
-        React.createElement(
+        _react2.default.createElement(
             'div',
             { style: { flex: 1, overflow: 'auto', padding: '1rem' } },
             searchResultBoxContent
         ),
-        React.createElement(
+        _react2.default.createElement(
             'div',
-            { style: styles.moreAppsButtonWrap },
+            { style: _headerBarStyles2.default.moreAppsButtonWrap },
             moreAppsButton
         )
     );
@@ -69,6 +108,6 @@ function SearchResults(props, _ref) {
 
 // Connect the store to the SearchResults component
 // TODO: This means we can only have one search results at all times (Perhaps make this more dynamic?)
-var SearchResultsWithState = withStateFrom(searchStore$, addD2Context(SearchResults));
+var SearchResultsWithState = (0, _d2UiCore.withStateFrom)(_search.searchStore$, (0, _d2UiCore.addD2Context)(SearchResults));
 
-export default SearchResultsWithState;
+exports.default = SearchResultsWithState;
