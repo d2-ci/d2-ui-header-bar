@@ -1,9 +1,9 @@
 {
   "name": "@dhis2/d2-ui-header-bar",
-  "version": "5.0.0",
+  "version": "1.4.0",
   "description": "The header bar for all DHIS2 applications",
-  "main": "./build/cjs/index.js",
-  "module": "./build/es/index.js",
+  "main": "./cjs/index.js",
+  "module": "./es/index.js",
   "license": "BSD-3-Clause",
   "peerDependencies": {
     "react": "^16.2.0",
@@ -34,5 +34,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "private": false
 }
