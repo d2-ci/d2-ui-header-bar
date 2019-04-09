@@ -1,3 +1,9 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = getBaseUrlFromD2ApiUrl;
 function replaceTrailingSlash(value) {
     return value.replace(/\/{1,}$/, '');
 }
@@ -12,7 +18,7 @@ function getUrl(location) {
     return replaceTrailingSlash(protocol + '//' + host + correctedPath);
 }
 
-export default function getBaseUrlFromD2ApiUrl(d2) {
+function getBaseUrlFromD2ApiUrl(d2) {
     // Create <a> element to use to create correct relative paths
     var url = document.createElement('a');
 

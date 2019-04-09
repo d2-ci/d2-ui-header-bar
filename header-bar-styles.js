@@ -1,20 +1,44 @@
-import _Object$assign from 'babel-runtime/core-js/object/assign';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/debounceTime';
-import log from 'loglevel';
-import curry from 'lodash/fp/curry';
+'use strict';
 
-export var MENU_ITEM_WIDTH = 125;
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.toggleStyle = exports.MENU_ITEM_WIDTH = undefined;
 
-export function applyUserStyle(user, style) {
+var _assign = require('babel-runtime/core-js/object/assign');
+
+var _assign2 = _interopRequireDefault(_assign);
+
+exports.applyUserStyle = applyUserStyle;
+exports.getWindowWidth = getWindowWidth;
+exports.getSearchResultsHeight = getSearchResultsHeight;
+
+var _Observable = require('rxjs/Observable');
+
+require('rxjs/add/observable/fromEvent');
+
+require('rxjs/add/operator/debounceTime');
+
+var _loglevel = require('loglevel');
+
+var _loglevel2 = _interopRequireDefault(_loglevel);
+
+var _curry = require('lodash/fp/curry');
+
+var _curry2 = _interopRequireDefault(_curry);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MENU_ITEM_WIDTH = exports.MENU_ITEM_WIDTH = 125;
+
+function applyUserStyle(user, style) {
     switch (user.userSettings.keyStyle) {
         case 'vietnam/vietnam.css':
-            return _Object$assign({}, style, { background: '#B40303' });
+            return (0, _assign2.default)({}, style, { background: '#B40303' });
         case 'india/india.css':
-            return _Object$assign({}, style, { background: '#EA5911' });
+            return (0, _assign2.default)({}, style, { background: '#EA5911' });
         case 'green/green.css':
-            return _Object$assign({}, style, { background: '#467E4A' });
+            return (0, _assign2.default)({}, style, { background: '#467E4A' });
         default:
             break;
     }
@@ -24,7 +48,7 @@ export function applyUserStyle(user, style) {
 
 var styles = {};
 
-export function getWindowWidth() {
+function getWindowWidth() {
     if (!global.document) {
         return 0;
     }
@@ -32,7 +56,7 @@ export function getWindowWidth() {
     return Math.max(window.document.documentElement.clientWidth, window.innerWidth || 0);
 }
 
-export var toggleStyle = curry(function (predicateFn, whenTrue, whenFalse) {
+var toggleStyle = exports.toggleStyle = (0, _curry2.default)(function (predicateFn, whenTrue, whenFalse) {
     return predicateFn() ? whenTrue : whenFalse;
 });
 
@@ -43,7 +67,7 @@ export var toggleStyle = curry(function (predicateFn, whenTrue, whenFalse) {
  *
  * @returns {number} The height of the search result box in pixels.
  */
-export function getSearchResultsHeight() {
+function getSearchResultsHeight() {
     var maxResultRowsHeight = 465;
 
     if (!global.document) {
@@ -61,9 +85,9 @@ export function getSearchResultsHeight() {
 // Only attach the window resize listener when we have a document
 if (global.document) {
     // Track the resize event on the window to recalculate the height of the search results box.
-    Observable.fromEvent(global, 'resize').debounceTime(300).subscribe(function () {
-        return _Object$assign(styles.searchResults, { maxHeight: getSearchResultsHeight() });
-    }, log.error);
+    _Observable.Observable.fromEvent(global, 'resize').debounceTime(300).subscribe(function () {
+        return (0, _assign2.default)(styles.searchResults, { maxHeight: getSearchResultsHeight() });
+    }, _loglevel2.default.error);
 }
 
 styles = {
@@ -311,4 +335,4 @@ styles = {
     }
 };
 
-export default styles;
+exports.default = styles;

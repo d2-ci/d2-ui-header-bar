@@ -1,18 +1,39 @@
-import _extends from 'babel-runtime/helpers/extends';
-import _Object$assign from 'babel-runtime/core-js/object/assign';
-import log from 'loglevel';
-import { getInstance, config } from 'd2';
-import { Observable } from 'rxjs/Observable';
+'use strict';
 
-import getBaseUrlFromD2ApiUrl from '../utils/getBaseUrlFromD2ApiUrl';
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.notifications$ = exports.appsMenuSource$ = exports.profileSource$ = undefined;
+
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _assign = require('babel-runtime/core-js/object/assign');
+
+var _assign2 = _interopRequireDefault(_assign);
+
+var _loglevel = require('loglevel');
+
+var _loglevel2 = _interopRequireDefault(_loglevel);
+
+var _d = require('d2');
+
+var _Observable = require('rxjs/Observable');
+
+var _getBaseUrlFromD2ApiUrl = require('../utils/getBaseUrlFromD2ApiUrl');
+
+var _getBaseUrlFromD2ApiUrl2 = _interopRequireDefault(_getBaseUrlFromD2ApiUrl);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Profile menu
-config.i18n.strings.add('settings');
-config.i18n.strings.add('profile');
-config.i18n.strings.add('account');
-config.i18n.strings.add('help');
-config.i18n.strings.add('log_out');
-config.i18n.strings.add('about_dhis2');
+_d.config.i18n.strings.add('settings');
+_d.config.i18n.strings.add('profile');
+_d.config.i18n.strings.add('account');
+_d.config.i18n.strings.add('help');
+_d.config.i18n.strings.add('log_out');
+_d.config.i18n.strings.add('about_dhis2');
 
 var profileMenuData = [{
     name: 'settings',
@@ -47,7 +68,7 @@ var profileMenuData = [{
 }];
 
 var addHelpLinkToProfileData = function addHelpLinkToProfileData() {
-    return getInstance().then(function (d2) {
+    return (0, _d.getInstance)().then(function (d2) {
         return d2.system.settings.get('helpPageLink');
     })
     // When the request for the system setting fails we return false to not set the help link
@@ -57,7 +78,7 @@ var addHelpLinkToProfileData = function addHelpLinkToProfileData() {
         return profileMenuData.map(function (profileMenuItem) {
             // Override the defaultAction with the helpPageLink when one was found.
             if (helpPageLink && profileMenuItem.name === 'help') {
-                return _Object$assign({}, profileMenuItem, { defaultAction: helpPageLink });
+                return (0, _assign2.default)({}, profileMenuItem, { defaultAction: helpPageLink });
             }
 
             return profileMenuItem;
@@ -68,7 +89,7 @@ var addHelpLinkToProfileData = function addHelpLinkToProfileData() {
 // TODO: Remove this when we have proper support for `displayName` from the getModules.action.
 var getTranslationsForMenuItems = function getTranslationsForMenuItems(_ref) {
     var modules = _ref.modules;
-    return getInstance().then(function (d2) {
+    return (0, _d.getInstance)().then(function (d2) {
         var api = d2.Api.getApi();
 
         var moduleNames = modules.map(function (module) {
@@ -78,12 +99,12 @@ var getTranslationsForMenuItems = function getTranslationsForMenuItems(_ref) {
         return api.post('i18n', moduleNames);
     }).then(function (translations) {
         var translatedModules = modules.map(function (module) {
-            return _Object$assign(_extends({}, module), { displayName: translations[module.name] || module.name });
+            return (0, _assign2.default)((0, _extends3.default)({}, module), { displayName: translations[module.name] || module.name });
         });
 
         return { modules: translatedModules };
     }).catch(function () {
-        log.warn('Could not load translations for modules, defaulting back to English');
+        _loglevel2.default.warn('Could not load translations for modules, defaulting back to English');
 
         return { modules: modules };
     });
@@ -105,9 +126,9 @@ var removeMenuManagementModule = function removeMenuManagementModule(_ref2) {
 };
 
 var loadMenuItems = function loadMenuItems() {
-    return getInstance().then(function (d2) {
+    return (0, _d.getInstance)().then(function (d2) {
         var api = d2.Api.getApi();
-        var baseUrl = getBaseUrlFromD2ApiUrl(d2);
+        var baseUrl = (0, _getBaseUrlFromD2ApiUrl2.default)(d2);
 
         // This path is only correct when the manifest has '..' as the baseUrl and a versioned api endpoint is used
         // TODO: This should have a proper API endpoint
@@ -119,17 +140,17 @@ var loadMenuItems = function loadMenuItems() {
 };
 
 var loadNotifications = function loadNotifications() {
-    return getInstance().then(function (d2) {
+    return (0, _d.getInstance)().then(function (d2) {
         var api = d2.Api.getApi();
         return api.get('me/dashboard');
     });
 };
 
-export var profileSource$ = Observable.fromPromise(addHelpLinkToProfileData(profileMenuData));
+var profileSource$ = exports.profileSource$ = _Observable.Observable.fromPromise(addHelpLinkToProfileData(profileMenuData));
 
-export var appsMenuSource$ = Observable.fromPromise(loadMenuItems()).catch(Observable.of([]));
+var appsMenuSource$ = exports.appsMenuSource$ = _Observable.Observable.fromPromise(loadMenuItems()).catch(_Observable.Observable.of([]));
 
-export var notifications$ = Observable.fromPromise(loadNotifications()).catch(Observable.of({
+var notifications$ = exports.notifications$ = _Observable.Observable.fromPromise(loadNotifications()).catch(_Observable.Observable.of({
     unreadInterpretations: 0,
     unreadMessageConversations: 0
 }));

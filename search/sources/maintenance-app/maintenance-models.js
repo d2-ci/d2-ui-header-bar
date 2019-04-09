@@ -1,5 +1,23 @@
-import _Object$keys from 'babel-runtime/core-js/object/keys';
-export function getSideBarConfig() {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
+exports.getSideBarConfig = getSideBarConfig;
+exports.getSectionForType = getSectionForType;
+exports.getFilterFieldsForType = getFilterFieldsForType;
+exports.getFiltersForType = getFiltersForType;
+exports.getTableColumnsForType = getTableColumnsForType;
+exports.getDefaultFiltersForType = getDefaultFiltersForType;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getSideBarConfig() {
     return {
         all: {
             items: []
@@ -39,10 +57,10 @@ export function getSideBarConfig() {
     };
 }
 
-export function getSectionForType(modelType) {
+function getSectionForType(modelType) {
     var config = getSideBarConfig();
 
-    return _Object$keys(config).find(function (section) {
+    return (0, _keys2.default)(config).find(function (section) {
         return config[section] && config[section].items && config[section].items.indexOf(modelType) >= 0;
     });
 }
@@ -146,7 +164,7 @@ var typeDetails = {
     }
 };
 
-export function getFilterFieldsForType(modelType) {
+function getFilterFieldsForType(modelType) {
     if (typeDetails.hasOwnProperty(modelType) && typeDetails[modelType].hasOwnProperty('filters')) {
         return typeDetails[modelType].filters;
     }
@@ -154,7 +172,7 @@ export function getFilterFieldsForType(modelType) {
     return [];
 }
 
-export function getFiltersForType(modelType) {
+function getFiltersForType(modelType) {
     if (typeDetails.hasOwnProperty(modelType) && typeDetails[modelType].hasOwnProperty('filters')) {
         return typeDetails[modelType].filters.reduce(function (f, filters) {
             f[filters] = null;
@@ -165,7 +183,7 @@ export function getFiltersForType(modelType) {
     return [];
 }
 
-export function getTableColumnsForType(modelType) {
+function getTableColumnsForType(modelType) {
     var preservePropNames = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
     if (typeDetails.hasOwnProperty(modelType) && typeDetails[modelType].hasOwnProperty('columns')) {
@@ -178,7 +196,7 @@ export function getTableColumnsForType(modelType) {
     return ['displayName', 'publicAccess', 'lastUpdated'];
 }
 
-export function getDefaultFiltersForType(modelType) {
+function getDefaultFiltersForType(modelType) {
     if (typeDetails.hasOwnProperty(modelType) && typeDetails[modelType].hasOwnProperty('defaultFilters') && Array.isArray(typeDetails[modelType].defaultFilters)) {
         return typeDetails[modelType].defaultFilters;
     }
@@ -186,6 +204,6 @@ export function getDefaultFiltersForType(modelType) {
     return [];
 }
 
-export default {
+exports.default = {
     getSideBarConfig: getSideBarConfig
 };

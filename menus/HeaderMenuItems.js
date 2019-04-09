@@ -1,6 +1,17 @@
-import React from 'react';
+'use strict';
 
-export default function HeaderMenuItems(props) {
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = HeaderMenuItems;
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function HeaderMenuItems(props) {
     var innerMenuStyle = {
         height: props.height,
         width: props.width,
@@ -13,7 +24,7 @@ export default function HeaderMenuItems(props) {
         padding: props.padding
     };
 
-    return React.createElement(
+    return _react2.default.createElement(
         'div',
         { style: innerMenuStyle, onScroll: props.onScroll },
         props.children
